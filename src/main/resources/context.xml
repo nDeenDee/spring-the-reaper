@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <bean class="quoters.TerminatorQuoter" id="terminatorQuoter">
+        <property name="message" value="I'll be back"/>
+    </bean>
+
+    <bean class="injectRandomInt.InjectRandomIntAnnotationBeanPostProcessor"/>
+    <bean class="injectRandomInt.TerminatorQuoter" id="injectRandomIntTerminatorQuoter">
+        <property name="message" value="I'll be back"/>
+    </bean>
+
+    <bean class="profiling.ProfilingController" id="profilingController" init-method="init"/>
+    <bean class="profiling.ProfilingHandlerBeanPostProcessor">
+        <property name="profilingController" ref="profilingController"/>
+    </bean>
+    <bean class="profiling.TerminatorQuoter" id="profilingTerminatorQuoter">
+        <property name="message" value="I'll be back"/>
+    </bean>
+
+    <bean class="postProxy.PostProxyInvokerContextListener"/>
+    <bean class="postProxy.TerminatorQuoter" id="postProxyTerminatorQuoter">
+        <property name="message" value="I'll be back"/>
+    </bean>
+
+    <bean class="deprecated.DeprecationHandlerBeanFactoryPostProcessor"/>
+    <bean class="deprecated.TerminatorQuoter" id="deprecatedClassTerminatorQuoter">
+        <property name="message" value="I'll be back"/>
+    </bean>
+
+</beans>
